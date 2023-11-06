@@ -8,3 +8,5 @@ scikit-learn
 torchvision
 scikit-image
 
+pymatting
+
