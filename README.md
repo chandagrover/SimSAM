@@ -1,5 +1,46 @@
 # SimSAM
 This code accompanies the paper "**Simple Siamese Representations based Semantic Affinity Matrix with Applications in Segmentation and Style Transfer**"
-git add .
-git commit -m "MESSAGE"
-git push origin main
+
+## **Abstract**
+Deep spectral methods have shown significant performance gains in image segmentation under unsupervised settings. Segmentation masks are obtained via spectral segmentation performed using the Laplacian of the feature affinity matrix (computed on pre-trained DINO features). As such, the computation of these feature affinity matrices is essential for segmentation. We introduce a novel framework SimSAM, based on a Simple Siamese network, to compute a semantically consistent, dense feature affinity matrix for spectral segmentation. We train the projector and predictor of the Siamese Neural Network in a non-contrastive way to compute the correlations of the dense features extracted from DINO-ViT. Our experimental results show improvements in object segmentation and text-based image stylization.
+## **Examples**
+## **How to Run**
+### **Dependencies**
+The dependencies are listed in the requirements.txt
+### **Data Preparation**
+- ECSSD Dataset
+- DUTS OMRON
+- DUTS
+- CUB
+- Pascal VOC2012
+
+## **Algorithm: SimSAM**
+#### **Step 1: Feature Extraction**
+`python extract/extract.py extract_features \
+    --images_list "/path/to/lists/images.txt" \    
+    --images_root "/path/to/dataset_name/images/" \    
+    --output_dir "/path/to/dataset_name/features/" \    
+    --model_name dino_vits16 \    
+    --batch_size 1`
+#### **Step 2: Eigen Vector Computation with Semantic Affinity Matrix**
+
+#### **Or Pre-Trained EigenVectors computed with SimSAM on below datasets**
+* ECSSD
+* DUTS
+* OMRON
+* CUB
+
+## **Applications**
+
+### **Object Segmentation**
+
+### **Semantic Segmentation**
+
+### **Semantic CLIPStyler**
+
+
+
+
+
+
+
