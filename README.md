@@ -8,11 +8,11 @@ Deep spectral methods have shown significant performance gains in image segmenta
 ### **Dependencies**
 The dependencies are listed in the requirements.txt
 ### **Data Preparation**
-- ECSSD Dataset
-- DUTS OMRON
-- DUTS
-- CUB
-- Pascal VOC2012
+- [ECSSD](https://www.cse.cuhk.edu.hk/leojia/projects/hsaliency/dataset.html)
+- [DUTS](http://saliencydetection.net/duts/)
+-  [DUTS-OMRON](http://saliencydetection.net/dut-omron/)
+- [CUB](https://www.vision.caltech.edu/visipedia/CUB-200-2011.html)
+- [Pascal VOC2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012//)
 
 ## **Algorithm: SimSAM**
 #### **Step 1: Feature Extraction**
@@ -32,7 +32,7 @@ The dependencies are listed in the requirements.txt
 #### **Or Pre-Trained EigenVectors computed with SimSAM on the below datasets**
 * ECSSD
 * DUTS
-* [DUTS-OMRON](http://saliencydetection.net/))
+* DUTS-OMRON
 * CUB
 
 ## **Applications**
