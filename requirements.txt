@@ -1,0 +1,10 @@
+opencv-python
+fire
+torch
+accelerate
+Pillow
+scipy
+scikit-learn
+torchvision
+scikit-image
+

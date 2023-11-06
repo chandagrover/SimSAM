@@ -76,7 +76,7 @@ docs/_build/
 target/
 
 # Jupyter Notebook
-.ipynb_checkpoints
+object-segmentation/extract/.ipynb_checkpoints
 
 # IPython
 profile_default/
@@ -120,6 +120,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+venv/
 .env
 .venv
 env/
