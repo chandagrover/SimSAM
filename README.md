@@ -32,7 +32,7 @@ The dependencies are listed in the requirements.txt
 #### **Or Pre-Trained EigenVectors computed with SimSAM on the below datasets**
 * ECSSD
 * DUTS
-* !DUTS-OMRON(http://saliencydetection.net/))
+* [DUTS-OMRON](http://saliencydetection.net/))
 * CUB
 
 ## **Applications**
