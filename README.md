@@ -23,11 +23,16 @@ The dependencies are listed in the requirements.txt
     --model_name dino_vits16 \    
     --batch_size 1`
 #### **Step 2: Eigen Vector Computation with Semantic Affinity Matrix**
-
-#### **Or Pre-Trained EigenVectors computed with SimSAM on below datasets**
+`python extract/extract_SimSAM.py extract_eigs \
+--images_root "/path/to/dataset_name/images/" \
+--features_dir "/path/to/dataset_name/features/" \
+--which_matrix "laplacian" \
+--output_dir "/path/to/dataset_name/eigs_SimSAM/laplacian" \
+--K 15`
+#### **Or Pre-Trained EigenVectors computed with SimSAM on the below datasets**
 * ECSSD
 * DUTS
-* OMRON
+* !DUTS-OMRON ((http://saliencydetection.net/))
 * CUB
 
 ## **Applications**
