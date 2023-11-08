@@ -41,9 +41,9 @@ The dependencies are listed in the requirements.txt
 `python extract/extract_SimSAM.py extract_single_region_segmentations \
 --features_dir "/path/to/dataset_name/features/" \
 --eigs_dir "/path/to/dataset_name/eigs_SimSAM/laplacian" \
---output_dir "path/to/dataset_name/srg_SimSAM/patches/laplacian_dino_vits16"  
+--output_dir "path/to/dataset_name/srg_SimSAM/patches/laplacian_dino_vits16"  `
 
-python extract/extract_SimSAM.py extract_crf_segmentations \
+`python extract/extract_SimSAM.py extract_crf_segmentations \
 --images_list "/path/to/lists/images.txt" \ 
 --images_root "/path/to/dataset_name/images/" \
 --segmentations_dir "path/to/dataset_name/srg_SimSAM/patches/laplacian_dino_vits16" \
