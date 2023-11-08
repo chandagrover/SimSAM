@@ -16,7 +16,7 @@ The dependencies are listed in the requirements.txt
 
 ## **Algorithm: SimSAM**
 #### **Step 1: Feature Extraction**
-`python extract/extract.py extract_features \
+`python extract/extract_SimSAM.py extract_features \
     --images_list "/path/to/lists/images.txt" \    
     --images_root "/path/to/dataset_name/images/" \    
     --output_dir "/path/to/dataset_name/features/" \    
@@ -38,6 +38,18 @@ The dependencies are listed in the requirements.txt
 ## **Applications**
 
 ### **Object Segmentation**
+`python extract/extract_SimSAM.py extract_single_region_segmentations \
+--features_dir "/path/to/dataset_name/features/" \
+--eigs_dir "/path/to/dataset_name/eigs_SimSAM/laplacian" \
+--output_dir "path/to/dataset_name/srg_SimSAM/patches/laplacian_dino_vits16"  
+
+python extract/extract_SimSAM.py extract_crf_segmentations \
+--images_list "/path/to/lists/images.txt" \ 
+--images_root "/path/to/dataset_name/images/" \
+--segmentations_dir "path/to/dataset_name/srg_SimSAM/patches/laplacian_dino_vits16" \
+--output_dir"path/to/dataset_name/srg_SimSAM/srg_SimSAM/crf/laplacian_dino_vits16" \
+--downsample_factor 16 \
+--num_classes 2`
 
 ### **Semantic Segmentation**
 
