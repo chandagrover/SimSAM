@@ -1,3 +1,4 @@
+#Extracting Features
 opencv-python
 fire
 torch
@@ -8,5 +9,10 @@ scikit-learn
 torchvision
 scikit-image
 
+#EigenVectors
 pymatting
+
+#CRF Segmentation
+SimpleCRF
+
 
