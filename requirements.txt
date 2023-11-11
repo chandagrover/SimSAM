@@ -18,3 +18,7 @@ SimpleCRF
 
 #eval object segmentation
 hydra-core
+
+#Visualize Semantic Segmentation
+streamlit
+matplotlib

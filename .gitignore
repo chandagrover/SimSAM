@@ -138,6 +138,8 @@ venv.bak/
 
 # mkdocs documentation
 /site
+object-segmentation/outputs
+object-segmentation/extract/__pycache__
 
 # mypy
 .mypy_cache/
