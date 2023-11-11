@@ -38,6 +38,8 @@ The dependencies are listed in the requirements.txt
 ## **Applications**
 
 ### **Object Segmentation**
+`cd object-segmentation`
+
 `python extract/extract_SimSAM.py extract_single_region_segmentations \
 --features_dir "/path/to/dataset_name/features/" \
 --eigs_dir "/path/to/dataset_name/eigs_SimSAM/laplacian" \
@@ -51,6 +53,8 @@ The dependencies are listed in the requirements.txt
 --downsample_factor 16 \
 --num_classes 2`
 
+### **Evaluating Object Segmentation**
+python eval/main.py predictions.run="srg_SimSAM/crf/laplacian_dino_vits16"
 ### **Semantic Segmentation**
 
 ### **Semantic CLIPStyler**
