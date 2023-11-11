@@ -1,0 +1,90 @@
+# @package _global_
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: ./outputs/${name}/${now:%Y-%m-%d_%H-%M-%S}
+
+# General
+name: "debug"
+seed: 1
+job_type: 'eval'
+fp16: False
+cpu: False
+wandb: False
+wandb_kwargs:
+  project: deep-spectral-segmentation
+
+# Data
+#data_root: ${env:UNSupervisedSEG_DATA_SEG_ROOT}  # <- REPLACE THIS WITH YOUR DIRECTORY
+#data_root: "/home/phdcs2/Hard_Disk/Datasets/Deep-Spectral-Segmentation/data/object-segmentation"
+data_root: "/home/phdcs2/Hard_Disk/Datasets/Deep-Spectral-Segmentation/data/object-segmentation/"
+data:
+ # - name: 'CUB'
+ #   images_dir: "${data_root}/CUB_200_2011/all_images/"
+ #   labels_dir: "${data_root}/CUB_200_2011/all_segmentations/"
+ #   crop: True
+ #   image_size: null
+ # - name: 'DUT_OMRON'
+ #   images_dir: "${data_root}/DUT_OMRON/DUT-OMRON-image/DUT-OMRON-image"
+ #   labels_dir: "${data_root}/DUT_OMRON/DUT-OMRON-gt-pixelwise/pixelwiseGT-new-PNG/"
+ #   crop: False
+ #   image_size: null
+ # - name: 'DUTS'
+ #   images_dir: "${data_root}/DUTS/DUTS-TE/DUTS-TE-Image"
+ #   labels_dir: "${data_root}/DUTS/DUTS-TE/DUTS-TE-Mask"
+ #   crop: False
+ #   image_size: null
+ # - name: 'ECSSD'
+ #   images_dir: "${data_root}/ECSSD/images"
+ #   labels_dir: "${data_root}/ECSSD/ground_truth_mask"
+ #   crop: False
+ #   image_size: null
+ - name: 'ECSSD'
+   images_dir: "${data_root}/ECSSD_5/images"
+   labels_dir: "${data_root}/ECSSD_5/ground_truth_mask"
+   crop: False
+   image_size: null
+#  - name: 'ECSSD'
+#    images_dir: "${data_root}/ECSSD_125image/images"
+#    labels_dir: "${data_root}/ECSSD_125image/ground_truth_mask"
+#    crop: False
+#    image_size: null
+#  - name: 'ECSSD'
+#    images_dir: "${data_root}/ECSSD_125image/orig_images/images"
+#    labels_dir: "${data_root}/ECSSD_125image/orig_images/ground_truth_mask"
+#    crop: False
+#    image_size: null
+#  - name: 'ECSSD'
+#    images_dir: "${data_root}/ECSSD_Frobenius/images_frobenius"
+#    labels_dir: "${data_root}/ECSSD_Frobenius/ground_truth_mask_frobenius"
+#    crop: False
+#    image_size: null
+# - name: 'ECSSD'
+#   images_dir: "${data_root}/ECSSD/orig_images/images"
+#   labels_dir: "${data_root}/ECSSD/orig_images/ground_truth_mask"
+#   crop: False
+#   image_size: null
+#  - name: 'ECSSD'
+#    images_dir: "${data_root}/ECSSD_1/images"
+#    labels_dir: "${data_root}/ECSSD_1/ground_truth_mask"
+#    crop: False
+#    image_size: null
+dataloader:
+  batch_size: 128
+  num_workers: 16
+
+# Predictions
+predictions:
+#  root: "/path/to/object-segmentation-data"
+  root: "/home/phdcs2/Hard_Disk/Datasets/Deep-Spectral-Segmentation/data/object-segmentation/"
+  run: "run_name"
+#  downsample: 16  # null
+  downsample: null  # 16
+
+  # The paths to the predictions
+  # CUB: ${predictions.root}/CUB_200_2011/${predictions.run}
+  # DUT_OMRON: ${predictions.root}/DUT_OMRON/${predictions.run}
+  # DUTS: ${predictions.root}/DUTS/${predictions.run}
+  ECSSD: ${predictions.root}/ECSSD_5/${predictions.run}

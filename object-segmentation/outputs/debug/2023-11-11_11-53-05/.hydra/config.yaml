@@ -1,0 +1,23 @@
+name: debug
+seed: 1
+job_type: eval
+fp16: false
+cpu: false
+wandb: false
+wandb_kwargs:
+  project: deep-spectral-segmentation
+data_root: /home/phdcs2/Hard_Disk/Datasets/Deep-Spectral-Segmentation/data/object-segmentation/
+data:
+- name: ECSSD
+  images_dir: ${data_root}/ECSSD_5/images
+  labels_dir: ${data_root}/ECSSD_5/ground_truth_mask
+  crop: false
+  image_size: null
+dataloader:
+  batch_size: 128
+  num_workers: 16
+predictions:
+  root: /home/phdcs2/Hard_Disk/Datasets/Deep-Spectral-Segmentation/data/object-segmentation/
+  run: srg_ours_5/crf/laplacian_dino_vits16
+  downsample: null
+  ECSSD: ${predictions.root}/ECSSD/${predictions.run}

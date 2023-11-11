@@ -152,71 +152,50 @@ def _extract_eig(
         batch_size: int=2,
         epochs: int = 10
 ):
-    pca_comp=384
-    # pca = PCA(n_components=pca_comp)
+    pca_comp=64
+    pca = PCA(n_components=pca_comp)
     index, features_file = inp
-    # utils.make_output_dir(output_dir)
-    # inputs = list(enumerate(sorted(Path(features_dir).iterdir())))
-
     # Load
     data_dict = torch.load(features_file, map_location='cpu')
-    print(data_dict.keys())   #['k', 'indices', 'file', 'id', 'model_name', 'patch_size', 'shape']
-    # print("shape=", data_dict['shape'], "k shape", data_dict['k'].shape, "patch_size=", data_dict['patch_size'])
     image_id = data_dict['file'][:-4]
-    print(image_id)
+
     # Load
     output_file = str(Path(output_dir) / f'{image_id}.pth')
     if Path(output_file).is_file():
         print(f'Skipping existing file {str(output_file)}')
-        return
-        # break
-        # return  # skip because already generated
+        return  # skip because already generated
 
     # Load affinity matrix
     feats = data_dict[which_features].squeeze().cuda()
-    # print("Without normalizing, Features Shape is",feats.shape)
     if normalize:
         feats = F.normalize(feats, p=2, dim=-1)
-    # print("After normalization, Features Shape",feats.shape)
-    # print("which_matrix=", which_matrix)
+
     # Eigenvectors of affinity matrix
     if which_matrix == 'affinity_torch':
         W = feats @ feats.T
-        # W_feat=contrastive_affinity(feats, feats.T)
-        # print("W shape=", W.shape)
         if threshold_at_zero:
             W = (W * (W > 0))
-            # print("W shape=", W.shape)
         eigenvalues, eigenvectors = torch.eig(W, eigenvectors=True)
         eigenvalues = eigenvalues.cpu()
         eigenvectors = eigenvectors.cpu()
-        print("which matrix=",which_matrix, "eigenvalues shape", eigenvalues.shape, "eigenvectors shape", eigenvectors.shape)
-
 
     # Eigenvectors of affinity matrix with scipy
     elif which_matrix == 'affinity_svd':
         USV = torch.linalg.svd(feats, full_matrices=False)
         eigenvectors = USV[0][:, :K].T.to('cpu', non_blocking=True)
         eigenvalues = USV[1][:K].to('cpu', non_blocking=True)
-        print("which matrix=",which_matrix,"eigenvalues shape", eigenvalues.shape, "eigenvectors shape", eigenvectors.shape)
 
     # Eigenvectors of affinity matrix with scipy
     elif which_matrix == 'affinity':
-        # print("Without normalizing, Features Shape is",feats.shape)
         W = (feats @ feats.T)
-        # W_feat=contrastive_affinity(feats, feats.T)
-        # print("W shape=", W.shape)
         if threshold_at_zero:
             W = (W * (W > 0))
         W = W.cpu().numpy()
-        # print("W shape=", W.shape)
         eigenvalues, eigenvectors = eigsh(W, which='LM', k=K)
         eigenvectors = torch.flip(torch.from_numpy(eigenvectors), dims=(-1,)).T
-        print("which matrix=",which_matrix, "eigenvalues shape", eigenvalues.shape, "eigenvectors shape", eigenvectors.shape)
 
     # Eigenvectors of matting laplacian matrix
     elif which_matrix in ['matting_laplacian', 'laplacian']:
-
         # Get sizes
         B, C, H, W, P, H_patch, W_patch, H_pad, W_pad = utils.get_image_sizes(data_dict)
         if image_downsample_factor is None:
@@ -290,25 +269,16 @@ def _extract_eig(
         # print(x0_arr.shape)
         x1_arr=affine_transform(x0_arr, affine_matrix)
     
-    
-#with PCA
-#         z0_arr= pca.fit_transform(x0_arr)
-#         z1_arr= pca.fit_transform(x1_arr)
-#         z0 = torch.from_numpy(z0_arr).float()
-#         z1 = torch.from_numpy(z1_arr).float()
-#         print("x shape: ", x0_arr.shape, x1_arr.shape)    
-#         print("z shape:", z0_arr.shape, z1_arr.shape)
-
-#without PCA
-#         print(x0_arr.shape, type(x0))
-        z0=x0_arr
-        z1=x1_arr
-        print("z shape:", z0.shape, z1.shape)
-#         z0 = torch.from_numpy(x0_arr).float()
-#         z1 = torch.from_numpy(x1_arr).float()
-
+        z0_arr= pca.fit_transform(x0_arr)
+        z1_arr= pca.fit_transform(x1_arr)
         # Define the affine transformation parameters
 
+        # z1_arr=affine_transform(z0_arr, affine_matrix)
+#         z1_arr=pca.fit_transform(z1_arr)
+        z0 = torch.from_numpy(z0_arr).float()
+        z1 = torch.from_numpy(z1_arr).float()
+        # print("x shape: ", x0_arr.shape, x1_arr.shape)    
+        # print("z shape:", z0_arr.shape, z1_arr.shape)
         # feat_list.append(feats)
         feat_dataset_z0 = Feature_Dataset(z0)
         if feats.shape[0]%2==0:
