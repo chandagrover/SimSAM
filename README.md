@@ -37,7 +37,7 @@ The dependencies are listed in the requirements.txt
 
 ## **Applications**
 
-### **Object Segmentation**
+### **1. Object Segmentation**
 `cd object-segmentation`
 
 `python extract/extract_SimSAM.py extract_single_region_segmentations \
@@ -53,16 +53,16 @@ The dependencies are listed in the requirements.txt
 --downsample_factor 16 \
 --num_classes 2`
 
-### **Evaluating Object Segmentation**
+#### **Evaluating Object Segmentation**
 `python eval/main.py predictions.run="srg_SimSAM/crf/laplacian_dino_vits16"`
-### **Semantic Segmentation**
+### **2. Semantic Segmentation**
 `python extract/extract_SimSAM.py extract_multi_region_segmentations \
     --non_adaptive_num_segments 15 \
     --features_dir "/path/to/dataset_name/features/dino_vits16" \
     --eigs_dir "/path/to/dataset_name/eigs/laplacian_dino_vits16" \
     --output_dir "/path/to/dataset_name/srg/multi_region_segmentation/laplacian_dino_vits16"`
 
-##### Extract bounding boxes
+###### Extract bounding boxes
 `python extract/extract_SimSAM.py extract_bboxes \
     --features_dir "/path/to/dataset_name/features/dino_vits16" \
     --segmentations_dir "/path/to/dataset_name/srg/multi_region_segmentation/laplacian_dino_vits16" \
@@ -70,19 +70,19 @@ The dependencies are listed in the requirements.txt
     --downsample_factor 16 \
     --output_file "/path/to/dataset_name/srg/multi_region_bboxes/laplacian_dino_vits16/bboxes.pth"`
 
-##### Extract bounding box features
+###### Extract bounding box features
 `python extract/extract_SimSAM.py extract_bbox_features \
     --model_name "dino_vits16" \
     --images_root "/path/to/dataset_name/images/trainval/JPEGImages" \
     --bbox_file "/path/to/dataset_name/srg/multi_region_bboxes/laplacian_dino_vits16/bboxes.pth" \
     --output_file "/path/to/dataset_name/srg/multi_region_bboxes/laplacian_dino_vits16/bbox_features.pth"`
 
-##### Extract clusters
+###### Extract clusters
 `python extract/extract_SimSAM.py extract_bbox_clusters \
     --bbox_features_file "/path/to/dataset_name/srg/multi_region_bboxes/laplacian_dino_vits16/bbox_features.pth" \
     --output_file "/path/to/dataset_name/srg/multi_region_bboxes/laplacian_dino_vits16/bbox_clusters.pth"` 
 
-##### Create semantic segmentations
+###### Create semantic segmentations
 `python extract/extract.py extract_semantic_segmentations \
     --segmentations_dir "/path/to/dataset_name/srg/multi_region_segmentation/laplacian_dino_vits16" \
     --bbox_clusters_file "/path/to/dataset_name/srg/multi_region_bboxes/laplacian_dino_vits16/bbox_clusters.pth" \
@@ -94,7 +94,7 @@ The dependencies are listed in the requirements.txt
 --images_root "/path/to/dataset_name/images/trainval/JPEGImages" \
 --segmentations_dir "/path/to/dataset_name/srg/semantic_segmentations/patches/laplacian_dino_vits16/segmaps" \
 --bbox_file "/path/to/dataset_name/srg/multi_region_bboxes/laplacian_dino_vits16/bboxes.pth"`
-### **Semantic CLIPStyler**
+### **3. Semantic CLIPStyler**
 
 
 
