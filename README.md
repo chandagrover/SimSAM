@@ -54,7 +54,7 @@ The dependencies are listed in the requirements.txt
 --num_classes 2`
 
 ### **Evaluating Object Segmentation**
-python eval/main.py predictions.run="srg_SimSAM/crf/laplacian_dino_vits16"
+`python eval/main.py predictions.run="srg_SimSAM/crf/laplacian_dino_vits16"`
 ### **Semantic Segmentation**
 
 ### **Semantic CLIPStyler**
