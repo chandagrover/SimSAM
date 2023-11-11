@@ -56,6 +56,7 @@ The dependencies are listed in the requirements.txt
 #### **Evaluating Object Segmentation**
 `python eval/main.py predictions.run="srg_SimSAM/crf/laplacian_dino_vits16"`
 ### **2. Semantic Segmentation**
+##### Creating Multi Region Segmementation
 `python extract/extract_SimSAM.py extract_multi_region_segmentations \
     --non_adaptive_num_segments 15 \
     --features_dir "/path/to/dataset_name/features/dino_vits16" \
