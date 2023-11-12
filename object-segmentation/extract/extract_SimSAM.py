@@ -851,7 +851,8 @@ def _extract_crf_segmentations(
         return  # skip because already generated
 
     # Load image and segmap
-    image_file = str(Path(images_root) / f'{id}.jpg')
+    # image_file = str(Path(images_root) / f'{id}.jpg')
+    image_file = str(Path(images_root) / f'{id}.png')
     image = np.array(Image.open(image_file).convert('RGB'))  # (H_patch, W_patch, 3)
     segmap = np.array(Image.open(segmap_path))  # (H_patch, W_patch)
 
