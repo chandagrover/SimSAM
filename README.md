@@ -31,9 +31,9 @@ The dependencies are listed in the requirements.txt
 --K 15`
 #### **Or Pre-Trained EigenVectors computed with SimSAM on the below datasets**
 * [ECSSD](https://drive.google.com/drive/folders/1-16ckaN8wuBu04kl198zvstpTXCC0Lix)
-* DUTS
-* DUTS-OMRON
-* CUB
+* [DUTS](https://drive.google.com/drive/folders/1u4GmeteUWb1G-R25OhZqSK_B1PswrSNF)
+* [DUTS-OMRON](https://drive.google.com/drive/folders/1d2p20ZPQYFKDxioFFnJnrESqeIuPA-Rw)
+* [CUB](https://drive.google.com/drive/folders/1xuf5Qs1y8p7Pg6iFwW5S0P4smDp4vOdu)
 
 ## **Applications**
 
