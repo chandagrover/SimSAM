@@ -97,7 +97,7 @@ The dependencies are listed in the requirements.txt
 --bbox_file "/path/to/dataset_name/srg/multi_region_bboxes/laplacian_dino_vits16/bboxes.pth"`
 ### **3. Semantic CLIPStyler**
 To stylize the segmented content image with text description.
-    python clipstyler_spectral.py --content_path "/path/to/content_image.png" --segmentedImage_path "/path/to/segmented_file.npy" --filename "filename" --exp_name "exp1" --text "Starry Night by Vincent van gogh".
+`    python clipstyler_spectral.py --content_path "/path/to/content_image.png" --segmentedImage_path "/path/to/segmented_file.npy" --filename "filename" --exp_name "exp1" --text "Starry Night by Vincent van gogh".`
 
 
 
