@@ -838,16 +838,23 @@ def _extract_crf_segmentations(
         images_root: str,
         num_classes: int,
         output_dir: str,
+        numpy_dir: str,
         crf_params: Tuple,
         downsample_factor: int = 16,
 ):
     index, (image_file, segmap_path) = inp
+    # numpy_dir=output_dir+"npy/npy"
+
 
     # Output file
     id = Path(image_file).stem
     output_file = str(Path(output_dir) / f'{id}.png')
     if Path(output_file).is_file():
         print(f'Skipping existing file {str(output_file)}')
+        return  # skip because already generated
+    numpy_crf_file = str(Path(numpy_dir) / f'{id}.npy')
+    if Path(numpy_crf_file).is_file():
+        print(f'Skipping existing file {str(numpy_crf_file)}')
         return  # skip because already generated
 
     # Load image and segmap
@@ -876,6 +883,12 @@ def _extract_crf_segmentations(
     import denseCRF  # make sure you've installed SimpleCRF
     unary_potentials = F.one_hot(torch.from_numpy(segmap_orig_res).long(), num_classes=num_classes)
     segmap_crf = denseCRF.densecrf(image, unary_potentials, crf_params)  # (H_pad, W_pad)
+
+    if np.max(segmap_crf) == 1:
+        segmap_crf = segmap_crf * 255
+
+    #Saving presentable numpy file and its image
+    np.save(numpy_crf_file, segmap_crf, allow_pickle=True)
 
     # Save
     Image.fromarray(segmap_crf).convert('L').save(output_file)
@@ -916,7 +929,9 @@ def extract_crf_segmentations(
         )
 
     utils.make_output_dir(output_dir)
-    fn = partial(_extract_crf_segmentations, images_root=images_root, num_classes=num_classes, output_dir=output_dir,
+    numpy_dir=output_dir+"npy/npy"
+    utils.make_output_dir(numpy_dir)
+    fn = partial(_extract_crf_segmentations, images_root=images_root, num_classes=num_classes, output_dir=output_dir, numpy_dir=numpy_dir,
                  crf_params=(w1, alpha, beta, w2, gamma, it), downsample_factor=downsample_factor)
     inputs = utils.get_paired_input_files(images_list, segmentations_dir)
     print(f'Found {len(inputs)} images and segmaps')
