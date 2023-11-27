@@ -98,7 +98,7 @@ The dependencies are listed in the requirements.txt
 ### **3. Semantic CLIPStyler**
 To stylize the segmented content image with text description.
 
-`    python clipstyler_spectral.py --content_path "/path/to/content_image.png" --segmentedImage_path "/path/to/segmented_file.npy" --filename "filename" --exp_name "exp1" --text "Starry Night by Vincent van gogh".`
+`    python clipstyler_spectral.py --content_path "/path/to/content_image.png" --segmentedImage_path "/path/to/test_set/segmented_file.npy" --filename "filename" --exp_name "exp1" --text "Starry Night by Vincent van gogh".`
 
 
 
